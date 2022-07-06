@@ -63,23 +63,13 @@ function App() {
     sound.play()
   }
 
-  // const countWin = (cards) => {
-  //   cards.map((card)=>{
-  //     if (cards.matched === true) {
-  //       setMatch(prevMatch => prevMatch + 1)
-  //     }
-  //     if (match === 6) {
-  //       callSound(yugiohSounds.win)
-  //     }
-  //     console.log(match)
-  //   }) 
-  // }
 
   //----------------------useEffect----------------------//
   useEffect(() => {
     if (choice1 && choice2) {
       setDisabled(true)
       if (choice1.src === choice2.src) {
+        setMatch(pre=>pre+1)
         setCards(prevCard => {
           return prevCard.map(card => {
             if (card.src === choice1.src) {
@@ -97,26 +87,14 @@ function App() {
     }
 
     
-  },[choice1, choice2]) 
+  },[choice1, choice2, match]) 
  
-  useEffect(()=>{
-    return shuffleCards()
-  },[])
 
   useEffect(()=>{
-    cards.map((card)=>{
-      if (card.matched===true) {
-        setMatch(prevCard=>prevCard+1)
-        console.log(match)
-      }
-    })
-  },[cards])
-
-  useEffect(()=>{
-    if (match>40) {
+    if (match>5) {
       setTimeout(()=>callSound(yugiohSounds.win),1000)
     }
-  })
+  },[match])
 
   return (
     <div className="App">
